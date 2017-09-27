@@ -1,0 +1,12 @@
+b
+e
+a
+c
+d
+NODESABOVEEDGESBELOW
+d/a/41
+a/d/14
+a/c/13
+a/b/12
+b/d/24
+c/d/34
