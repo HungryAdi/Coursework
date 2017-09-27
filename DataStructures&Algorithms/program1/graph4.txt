@@ -1,0 +1,11 @@
+anteater;bunny
+anteater;cow
+anteater;cow
+bunny;dog
+cow;elephant
+cow;fox
+cow;elephant
+dog;grail
+elephant;dog
+fox;dog
+fox;grail
