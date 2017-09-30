@@ -1,0 +1,3 @@
+Assignment: design a Max program that functions as a MIDI synthesizer.
+
+To use the midi synthesizer (virtual keyboard available), view the patch in presentation mode and select a waveform! Play around with the envelope settings to shape the sound.
