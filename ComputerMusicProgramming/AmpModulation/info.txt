@@ -1,0 +1,4 @@
+For this assignment I was required to generate and control a tone in different ways:
+
+1) In index.html I used the Web Audio API to control the amplitude of a sine wave with a slider
+2) In the Max patch, the DAC playing a chord can be turned on and off with a button
