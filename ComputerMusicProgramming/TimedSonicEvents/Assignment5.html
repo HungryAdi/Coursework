@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Web Audio API</title>
+  </head>
+  <body>
+    <h1>Assignment 5</h1>
+    <p>In either Max or Web Audio API, whichever you prefer (or both if you want!), write a program that schedules a series of specifically timed sonic events.</p>
+    <p>I used the Web Audio API to generate three synthesized notes in ascending order, hit the play button!</p>
+    <button type="button" id="butt">Play</button>
+    <script>
+    var audioContext = new AudioContext()
+    var volControl = document.getElementById("butt");
+
+    function play (delay, pitch, duration) {
+      var startTime = audioContext.currentTime + delay
+      var endTime = startTime + duration
+
+      var envelope = audioContext.createGain()
+
+      envelope.gain.value = 0
+      envelope.gain.setTargetAtTime(1, startTime, 0.1)
+      envelope.gain.setTargetAtTime(0, endTime, 0.2)
+
+      var filter = audioContext.createBiquadFilter()
+      filter.connect(audioContext.destination)
+      filter.type = 'highpass'
+      filter.frequency.value = 10000
+      envelope.connect(filter)
+
+      filter.frequency.setValueAtTime(10000, startTime)
+      filter.frequency.linearRampToValueAtTime(500, endTime)
+
+      var oscillator = audioContext.createOscillator()
+      oscillator.connect(envelope)
+
+      var vibrato = audioContext.createGain()
+      vibrato.gain.value = 30
+      vibrato.connect(oscillator.detune)
+
+      var lfo = audioContext.createOscillator()
+      lfo.frequency.value = 5
+      lfo.connect(vibrato)
+
+      oscillator.type = 'sawtooth'
+      oscillator.detune.value = pitch * 100
+
+      oscillator.start(startTime)
+      lfo.start(startTime)
+
+      oscillator.stop(endTime + 2)
+      lfo.stop(endTime + 2)
+    }
+
+    volControl.addEventListener("click", function() {
+      play(0, 3, 0.5)
+      play(1, 10, 0.5)
+      play(2, 15, 0.5)
+    });
+    </script>
+  </body>
+</html>
