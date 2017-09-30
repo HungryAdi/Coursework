@@ -1,0 +1,1 @@
+Simplified version of a keyboard drumkit, this is a Max patch that can load two samples from memory and assigns them to the A and W key respectively.
