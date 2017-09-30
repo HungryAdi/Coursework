@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+  button {
+  background-color: #FFF; /* Green */
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+    #white {
+      transition-duration: 0.4s;
+      border: 2px solid #D3D3D3;
+    }
+    #white:hover {
+      background-color: #D3D3D3;
+      color: white;
+    }
+
+    #pink {
+      transition-duration: 0.4s;
+      border: 2px solid #FFC0CB;
+    }
+    #pink:hover {
+      background-color: #FFC0CB;
+      color: white;
+    }
+
+    #brown {
+      transition-duration: 0.4s;
+      border: 2px solid #A52A2A;
+    }
+    #brown:hover {
+      background-color: #A52A2A;
+      color: white;
+    }
+
+  </style>
+  <title>Randomness and Noise</title>
+</head>
+<body>
+<h1>Noise Generator!</h2>
+  <button type="button" id="white">White Noise</button>
+  <button type="button" id="pink">Pink Noise</button>
+  <button type="button" id="brown">Brown Noise</button>
+  <h3>This project uses random values (from javascripts Math.random()) to generate different types of noise.</h3>
+  <script>
+    var audioContext = new AudioContext();
+    var whitebutton = document.getElementById("white");
+    var pinkbutton = document.getElementById("pink");
+    var brownbutton = document.getElementById("brown");
+    var playing = false;
+
+    function playWhite() {
+      var bufferSize = 2 * audioContext.sampleRate,
+      noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate),
+      output = noiseBuffer.getChannelData(0);
+      for (var i = 0; i < bufferSize; i++) {
+      output[i] = Math.random() * 2 - 1;
+      }
+      var whiteNoise = audioContext.createBufferSource();
+      whiteNoise.connect(audioContext.destination);
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.start(audioContext.currentTime);
+      whiteNoise.stop(audioContext.currentTime+2);
+      //whiteNoise.loop = true;
+    }
+
+    function playPink() {
+      var bufferSize = 4096;
+      var pinkNoise = (function() {
+    var b0, b1, b2, b3, b4, b5, b6;
+    b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
+    var node = audioContext.createScriptProcessor(bufferSize, 1, 1);
+    node.onaudioprocess = function(e) {
+        var output = e.outputBuffer.getChannelData(0);
+        for (var i = 0; i < bufferSize; i++) {
+            var white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            b3 = 0.86650 * b3 + white * 0.3104856;
+            b4 = 0.55000 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.0168980;
+            output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+            output[i] *= 0.11; // (roughly) compensate for gain
+            b6 = white * 0.115926;
+        }
+    }
+    return node;
+    })();
+    return pinkNoise;
+    //pinkNoise.start(audioContext.currentTime);
+    //pinkNoise.stop(audioContext.currentTime+2);
+  }
+
+  function playBrown() {
+      var bufferSize = 4096;
+      var brownNoise = (function() {
+      var lastOut = 0.0;
+      var node = audioContext.createScriptProcessor(bufferSize, 1, 1);
+      node.onaudioprocess = function(e) {
+          var output = e.outputBuffer.getChannelData(0);
+          for (var i = 0; i < bufferSize; i++) {
+              var white = Math.random() * 2 - 1;
+              output[i] = (lastOut + (0.02 * white)) / 1.02;
+              lastOut = output[i];
+              output[i] *= 3.5; // (roughly) compensate for gain
+          }
+      }
+      return node;
+      })();
+      return brownNoise;
+  }
+
+    whitebutton.addEventListener("click", function() {
+        playWhite();
+    });
+
+    pinkbutton.addEventListener("click", function() {
+      var start = audioContext.currentTime;
+      var pink = playPink();
+      pink.connect(audioContext.destination);
+      var check = function(){
+      if(audioContext.currentTime >= start+2){
+        pink.disconnect();
+      }
+      else {
+      setTimeout(check, 1000); // check again in a second
+      }
+      }
+      check();
+    });
+
+    brownbutton.addEventListener("click", function() {
+      var start = audioContext.currentTime;
+      var brown = playBrown();
+      brown.connect(audioContext.destination);
+      var check = function(){
+      if(audioContext.currentTime >= start+2){
+        brown.disconnect();
+      }
+      else {
+      setTimeout(check, 1000); // check again in a second
+      }
+      }
+      check();
+    });
+
+  </script>
+</body>
+</html>
