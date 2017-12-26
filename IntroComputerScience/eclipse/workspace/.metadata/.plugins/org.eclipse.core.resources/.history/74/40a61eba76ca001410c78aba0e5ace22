@@ -1,0 +1,27 @@
+import java.io.IOException;
+
+
+public class Facile
+{
+	
+	public static void main(String[] args)
+	{
+		if (args.length<1) {
+			System.out.println("Facile program file to run");
+			return;
+		}
+		
+		try
+		{
+			Parser.parseProgram(args[0]);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+
+
+	}
+
+}

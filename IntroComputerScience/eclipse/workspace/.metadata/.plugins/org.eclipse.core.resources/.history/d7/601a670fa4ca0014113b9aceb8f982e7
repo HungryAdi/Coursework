@@ -1,0 +1,13 @@
+
+public class AdiLinkedList <E>
+{
+
+	public AdiLinkedList ()
+	{
+	}
+	
+	public addFirst()<E> e) {
+		
+	}
+	
+}

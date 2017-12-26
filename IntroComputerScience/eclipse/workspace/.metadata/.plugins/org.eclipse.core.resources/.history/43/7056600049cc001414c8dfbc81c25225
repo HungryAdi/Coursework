@@ -1,0 +1,39 @@
+
+public class TestAdiBT
+{
+	
+	public static void main(String[] args) {
+		
+		AdiBinaryTree<String, Integer>tree = new AdiBinaryTree<String, Integer>();
+		// put a bunch of integers into the hashtable
+		System.out.println("putting 10K intergers into HT");
+		for (int i=0; i<10000; i++) {
+			Integer int1 = new Integer(i);
+			tree.put("myinteger-"+i, int1);	
+		}
+		System.out.println("HT size is "+tree.size());
+//		int[] stats=tree.getStats();
+//		for (int i=0; i< stats.length; i++) {
+//			System.out.println(i+"="+stats[i]);
+//		}
+
+		
+		System.out.println("getting integer for key "+"myinteger-1234");
+		Integer int2 = tree.get("myinteger-1234");
+		System.out.println("got integer "+int2);
+		
+//		System.out.println("removing integer for key "+"myinteger-500");
+//		int2 = tree.remove("myinteger-500");
+//		System.out.println("removed integer "+int2);
+//		System.out.println("HT size is "+hashtable.size());
+
+		
+		System.out.println("check if it is still there .. ");
+		int2 = tree.get("myinteger-500");
+		System.out.println("got integer "+int2);
+		
+		
+	}
+
+}
+

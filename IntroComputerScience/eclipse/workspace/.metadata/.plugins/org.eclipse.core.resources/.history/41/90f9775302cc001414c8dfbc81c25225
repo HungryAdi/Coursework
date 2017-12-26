@@ -1,0 +1,50 @@
+package ics22;
+
+import java.util.Stack;
+import java.util.Scanner;
+
+
+public class Matcher
+{
+	
+	public static boolean isMatched (String expression) {
+		
+		final String opening = "({["; // opening delimiters
+		final String closing = ")}]";
+		Stack<Character> myStack = new Stack<Character>();
+		
+		for (int i=0; i<expression.length(); ++i) {
+			char c = expression.charAt(i);
+			if (opening.indexOf(c) !=-1) {
+				myStack.push(c);
+			} else if (closing.indexOf(c) !=-1){
+				if (myStack.isEmpty()) {
+					return false;
+				}
+				Character c2 = myStack.pop();
+				if (opening.indexOf(c2) != closing.indexOf(c)) {
+					return false;
+				}
+			}
+		}
+		return myStack.isEmpty();	
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			System.out.print("Enter expression: ");
+			String s = scanner.nextLine();
+				if (isMatched(s)) {
+					System.out.println(s + " is matched");	
+				}else {
+					System.out.println(s + " is not matched")	;
+				}	
+		}
+
+	}
+	
+
+}

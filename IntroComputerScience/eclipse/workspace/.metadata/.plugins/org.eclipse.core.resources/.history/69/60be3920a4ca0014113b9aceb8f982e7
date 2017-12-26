@@ -1,0 +1,16 @@
+
+public class AdiLinkedList <E>
+{
+
+	public AdiLinkedList ()
+	{
+	}
+	
+	public void addFirst()<E> e) {
+		
+	}
+	
+	public int size() {
+		return 0;
+	}
+}

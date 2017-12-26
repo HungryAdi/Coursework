@@ -1,0 +1,15 @@
+
+public class Facile
+{
+	
+	public static void main(String[] args)
+	{
+		if (args.length<1) {
+			System.out.println("Facile program file to run");
+			return;
+		}
+		
+		
+	}
+
+}

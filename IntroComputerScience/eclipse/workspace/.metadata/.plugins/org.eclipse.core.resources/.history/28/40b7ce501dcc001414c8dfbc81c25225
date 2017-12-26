@@ -1,0 +1,51 @@
+
+public class AdiHashtable<K, V>
+{
+
+	private int size=0;
+	
+	
+	
+	public int size () {
+		return this.size;
+	}
+	
+	public boolean isEmpty() {
+		return (this.size==0);
+	}
+	
+	//TODO: implement this
+	public V get (String key) {
+	
+		return null;
+	}
+	
+	//TODO: implement this
+	public void put(String key, V value) {
+		
+	}
+	
+	//TODO: implement this
+	public V remove (String key) {
+	
+		return null;
+	}
+	
+	
+	private class HashtableNode<String, V> {
+		
+		String key;
+		V value;
+		
+		
+		HashtableNode(String key, V value) {
+			this.key=key;
+			this.value=value;
+		}
+		
+		//TODO: Implement this
+		boolean keyMatches(String key) {
+			return false;
+		}
+	}
+}

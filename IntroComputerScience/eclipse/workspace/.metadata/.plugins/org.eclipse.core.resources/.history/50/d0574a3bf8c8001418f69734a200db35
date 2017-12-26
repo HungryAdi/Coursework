@@ -1,0 +1,43 @@
+package ics22;
+
+import java.util.Stack;
+
+
+public class Matcher
+{
+	
+	public static boolean isMatched (String expression) {
+		
+		final String opening = "({["; // opening delimiters
+		final String closing = ")}]";
+		Stack<Character> myStack = new Stack<Character>();
+		
+		for (int i=0; i<expression.length(); ++i) {
+			char c = expression.charAt(i);
+			if (opening.indexOf(c) !=-1) {
+				myStack.push(c);
+			} else if (closing.indexOf(c) !=-1){
+				if (myStack.isEmpty()) {
+					return false;
+				}
+				Character c2 = myStack.pop();
+				if (opening.indexOf(c2) != closing.indexOf(c)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	
+	public static void main(String[] args) {
+		
+			if (isMatched(args[0])) {
+				System.out.println(args[0] + " is matched");	
+			}else {
+				System.out.println(args[0] + " is not matched")	;
+			}	
+	}
+	
+
+}

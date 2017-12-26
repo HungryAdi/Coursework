@@ -1,0 +1,5 @@
+LET A 1
+GOTO 4
+LET A 2
+PRINT A
+.

@@ -1,0 +1,4 @@
+LET A 3
+PRINT A
+GOTO 10
+.

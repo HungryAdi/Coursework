@@ -1,0 +1,11 @@
+
+public class AdiLinkedList <E>
+{
+
+	public AdiLinkedList()
+	{
+		
+		
+	}
+	
+}

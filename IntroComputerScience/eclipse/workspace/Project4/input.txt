@@ -1,0 +1,12 @@
+Short simulation     brief description of the simulation
+5                    the length of the simulation, in minutes
+2                    the number of ticket windows
+S                    how many lines: "S" for single, "M" for multiple
+45                   number of seconds it takes to process a customer at window #1
+35                   number of seconds it takes to process a customer at window #2
+1 30                 one customer arrives 30 seconds into the simulation
+5 35                 five customers arrive 35 seconds into the simulation
+3 45                 three customers arrive 45 seconds into the simulation
+1 60                 one customer arrives 60 seconds into the simulation
+1 90                 one customer arrives 90 seconds into the simulation
+END                  the "END" tag marks the end of the customer arrivals

@@ -1,0 +1,89 @@
+import java.util.LinkedList; 
+import java.util.Iterator;
+
+public class AdiHashtable<K, V>
+{
+
+	private int size;
+	private LinkedList[] arr;
+	private int ARRAY_SIZE = 100;
+
+	public AdiHashtable() {
+		this.size = 0;
+		this.arr = new LinkedList[ARRAY_SIZE];
+	}
+
+
+	public int size () {
+		return this.size;
+	}
+
+	public boolean isEmpty() {
+		return (this.size==0);
+	}
+
+	//TODO: implement this
+	public V get (String key) {
+		int index = this.getIndex(key);
+		//Iterator i  = this.arr[index].iterator();
+		for (int n = 0; n<this.arr[index].size(); n++) { 
+			if(this.arr[index].get(n) instanceof HashtableNode) {
+				if(((HashtableNode) this.arr[index].get(n)).keyMatches(key)) {
+					return this.arr[index].get(n).getValue();
+				}
+			}
+		}
+		return null;
+	}
+
+	//TODO: implement this
+	public void put(String key, V value) {
+		int index = this.getIndex(key);
+		HashtableNode<String, V> node = new HashtableNode<String, V>(key, value);
+		this.arr[index].add(node);
+		this.size++;
+	}
+
+	//TODO: implement this
+	public V remove (String key) {
+		int index = this.getIndex(key);
+		for(HashtableNode<String, V> n: this.arr[index]) {
+			if (n.keyMatches(key)) {
+				this.arr[index].remove(n);
+				return n.getValue();
+			}
+		}
+		size--;
+		return null;
+	}
+
+	private int getIndex(String key) {
+		int store = 0;
+		store = (key.hashCode())%(this.ARRAY_SIZE);
+		return store;
+	}
+	
+	
+	private class HashtableNode<String, V> {
+
+		String key;
+		V value;
+
+		HashtableNode(String key, V value) {
+			this.key=key;
+			this.value=value;
+		}
+
+		public V getValue() {
+			return this.value;
+		}
+
+		//TODO: Implement this
+		boolean keyMatches(String key) {
+			if (this.key.equals(key)) {
+				return true;
+			}
+			return false;
+		}
+	}
+}

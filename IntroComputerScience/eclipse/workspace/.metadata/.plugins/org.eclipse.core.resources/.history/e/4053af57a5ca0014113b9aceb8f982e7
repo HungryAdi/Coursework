@@ -1,0 +1,36 @@
+
+public class AdiLinkedList <E>
+{
+
+	private Node<E> fist = null;
+	int size = 0;
+	
+	public AdiLinkedList ()
+	{
+	}
+	
+	public void addFirst (E e) {
+		
+	}
+	
+	
+	
+	public E removeFirst ( ) {
+		return null;
+	}
+	
+	
+	public int size() {
+		return 0;
+	}
+	
+	public boolean isEmpty() {
+		return true;
+	}
+	
+	
+	class Node <E> {
+		private Node<E> next;
+	}
+	
+}
