@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Platform
+  - Ground
+  - CombinedPlayerController
+  - Fire
+  - FirstSelected
+  - FirstSelected1
+  - FirstSelected2
+  - FirstSelected4
+  - FirstSelected3
+  - charPanel
+  - Wall
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Foreground
+  - Grappleable
+  - Lava
+  - Background
+  - Grapple
+  - Player 1
+  - Player 2
+  - Player 3
+  - Player 4
+  - Offscreen
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 2216582285
+    locked: 0
+  - name: Rock
+    uniqueID: 923224087
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 4206863135
+    locked: 0

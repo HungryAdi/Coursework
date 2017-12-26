@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1283560925856164}
+  m_IsPrefabParent: 1
+--- !u!1 &1283560925856164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4080393242129780}
+  - component: {fileID: 114993902948439988}
+  m_Layer: 0
+  m_Name: RockSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4080393242129780
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283560925856164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114993902948439988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283560925856164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6527305a47db50349980319f78e4d10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockPrefab: {fileID: 1303127070508730, guid: d79778876d10ae046a7880fb8d9590dc, type: 2}
+  lavaSpawnWarning: {fileID: 1617857945547450, guid: 93d3bbf8e2a05fc4cb2ad121a2227b42,
+    type: 2}
+  placementTextPrefab: {fileID: 1134472699843336, guid: 01dc15e3a3b904e488b26c61c051e6f5,
+    type: 2}
+  binWeights:
+  - 0.05
+  - 0.125
+  - 0.175
+  - 0.3
+  - 0.175
+  - 0.125
+  - 0.05
+  lavaRockSpawnRate: 0.05
+  breakableRockSpawnRate: 0.95
+  redistribute: 1
+  considerPlayerPosition: 0
+  spawnFrequency: 0.2
+  spawnDecrease: 0
+  minScale: 0.75
+  maxScale: 1.25
+  maxRockCount: 100
+  lavaLaunchVelMin: 100
+  lavaLaunchVelMax: 150
+  minGravScale: 2
+  maxGravScale: 6
+  warningDuration: 3.5
