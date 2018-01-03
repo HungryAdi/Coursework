@@ -1,43 +1,34 @@
 # Coursework
 ### Projects and references from college classes
 ## [Advanced Computer Graphics](https://github.com/HungryAdi/Coursework/tree/master/AdvancedComputerGraphics)
-   Includes: Unity Shader that simulates water ripples formed upon impact of a sphere with the water plane surface. WebGL        lighting simulator using three shading methods to illuminate a 3D object.
+   Unity Shader that simulates water ripples formed upon impact of a sphere with the water plane surface. WebGL        lighting simulator using three shading methods to illuminate a 3D object.
    
 ## [Capstone Game Project](https://github.com/HungryAdi/Coursework/tree/master/CapstoneGameProject)
-   Senior Game Project developed in a team of 6 in Unity. Multiplayer Arcade game with full Xbox 360 Controller support and  original art and sound assets. Game developed under industry mentorship.
+   Senior Game Project developed in a team of 6 in Unity. Multiplayer Arcade game with full Xbox 360 Controller support and   original art and sound assets. Game developed under industry mentorship.
   
-## [Computer Graphics](https://github.com/HungryAdi/Coursework/tree/master/ComputerGraphics) 
- * Assignment 2: Restricted OpenGL Library
-   - The goal is to compute all transform matrices with own implementation of the OpenGL Library. C++ functions written are      found in i_my_gl.cpp/i_my_gl.h
-    
- * Assignment 3: Lighting Implementation
-   - Implement the Phong Illumination model by calculating the color at each vertex of a surface with the OpenGl Lighting        equation.
-    
- * Assignment 4: Vertex & Fragment Shader
-   - Vertex Shader to calculate the color at every surface vertex according to Gouaraud and Phong shading models. The            fragment shader assigns texture coordinates to each vertex to implement texture mapping.
+## [Computer Graphics](https://github.com/HungryAdi/Coursework/tree/master/ComputerGraphics)
+   C++ implementations of a Restricted OpenGL Library (fewer functions), Phong Illumination model and a Vertex and Fragment shader for shading and texture mapping.
     
 ## [Computer Music Programming](https://github.com/HungryAdi/Coursework/tree/master/ComputerMusicProgramming)
- * Algorithmic Composition 
-   - Patch built in Max:MSP that plays two algorithmically composed pieces. The first piece consists of midi-events              triggered at scheduled intervals while the second piece demonstrates generative music as different samples are                introduced as the music evolves.
-      
- * Amp Modulation: Amplitude Modulation
-   - Contains a Web Audio application and Max patch that demonstrate amplitude modulation. The former consists of a slider       that controls the amplitude of a constant sine wave while the Max patch consists of a DAC that can be turned on/off
-  
- * Control Functions
-   - Max patch that demonstrates multiple control functions through a dubstep "wobble bass" synthesizer. Heavy frequency and      amplitude modualtion create the "wobble effect" and I extended the synth to change the Q factor and wobble rate to random      values after each time the synth is played.
+   Includes a Max Patch to play algorithmically composed pieces, create a dubstep "wobble bass" using multiple control functions, midi synthesizer, and basic sampler that binds samples to keyboard keys. Includes applications using the Javascript Web Audio API that demonstrate amplitude modulation, noise generation based on random values and timing in audio.
    
- * Midi Synthesizer
-   - Max patch of a midi synthesizer that accepts midi notes from a keyboard or the virtual keyboard in the patch. Contains an    ADSR envelope that can be used to shape the sound.
+## [Data Structures and Algorithms](https://github.com/HungryAdi/Coursework/tree/master/DataStructures%26Algorithms)
+   All programs written in C++. Iterative and recursive functions to remove duplicate values in a linked list. Implementations of Selection, Merge and Radix Sorting algorithms. Various problems involving storing input from a text file into a Map. Implementations of Set, Queue and Priority Queue using linked lists. Implementations of a Map using a Binary Search Tree and Priority Queue using a Heap. Implementation of a Map using a Hash Table. Implement a Graph using a Hash Table and apply it to write Djikstra's Algorithm.
    
- * Randomness (Noise)
-   - Web Audio script to create three types of noise (white, pink and brown) based on random values across the audible            frequency range.
+## [Intro to Computer Science](https://github.com/HungryAdi/Coursework/tree/master/IntroComputerScience)
+   Java programs covering Classes, Inheritance, Linked Lists and Recursion with Linked List and Trees. Programs written with Racket to explore functional programming.
    
- * Sample Trigger
-   - This Max Patch is a simplified midi-keyboard that has drum-kit samples bound to specific keys. Press the given keys on      the computer keyboard to play the drums.
+## [Machine Learning](https://github.com/HungryAdi/Coursework/tree/master/MachineLearning)
+   Homework assignments written in Python using Numpy and MatPlotLib to: introduce data analysis and Naive Bayes Classifiers, Linear Regression and Cross-Validation, Logistic Regression and Shattering, Clustering and Principle Compnent Analysis on humanfaces.
    
- * Timed Sonic Events
-   - Used Web Audio API to generate three notes that play in ascending order at specific time intervals.
+## [Parallel and Distributed Systems](https://github.com/HungryAdi/Coursework/tree/master/ParrallelAndDistributedSystems)
+   C++ program that is a multi-threaded solution to the Dining Philosopher's Problem.
+
+## [Probability and Statistics](https://github.com/HungryAdi/Coursework/tree/master/Probability%26Statistics)
+   Homework assignments containing written problems as well as python code that cover topics such as: Baye's Rule, Expectation and Conditional Independence, Empirical Distributions, Normal Distributions and Regression, and Markov Chains.
    
+## [System Design](https://github.com/HungryAdi/Coursework/tree/master/SystemDesign)
+   All programs written in C. Implementation of C string library functions from strlen() to strtok(). A Concurrent client and server. Multi-Threaded concurrent execution patterns. Implementation of Unix Shell that parses inout and executes commands. Implementation of fork() to create new processes. Implementation of 'ls' with various flags (such as ls-l). 
  
     
   
