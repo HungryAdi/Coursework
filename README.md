@@ -1,10 +1,10 @@
 # Coursework
 ### Projects and references from college classes
 ## [Advanced Computer Graphics](https://github.com/HungryAdi/Coursework/tree/master/AdvancedComputerGraphics)
-    Includes: Unity Shader that simulates water ripples formed upon impact of a sphere with the water plane surface. WebGL        lighting simulator using three shading methods to illuminate a 3D object.
+   Includes: Unity Shader that simulates water ripples formed upon impact of a sphere with the water plane surface. WebGL        lighting simulator using three shading methods to illuminate a 3D object.
    
 ## [Capstone Game Project](https://github.com/HungryAdi/Coursework/tree/master/CapstoneGameProject)
-   Senior Game Project developed in a team of 6 in Unity. Multiplayer Arcade game with full Xbox 360 Controller support and original art and sound assets. Game developed under industry mentorship.
+   Senior Game Project developed in a team of 6 in Unity. Multiplayer Arcade game with full Xbox 360 Controller support and  original art and sound assets. Game developed under industry mentorship.
   
 ## [Computer Graphics](https://github.com/HungryAdi/Coursework/tree/master/ComputerGraphics) 
  * Assignment 2: Restricted OpenGL Library
