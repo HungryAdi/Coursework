@@ -1,5 +1,5 @@
 ## Parallel and Distributed Systems
-Program written in C and uses MPI to distribute work across multiple computers.
+Program written in C and uses MPI (Message Passing Interface) to distribute work across multiple computers.
 
 * Dining Philosopher's Problem
   - Each Philospher is implemented by a thread that attempts to access two mutexes (forks).
