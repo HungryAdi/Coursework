@@ -1,5 +1,5 @@
-## Machine Learning
-### All Programs written in Python and use Numpy and Matplotlib
+## [Machine Learning](https://github.com/HungryAdi/Coursework/tree/master/MachineLearning)
+All Programs written in Python and use Numpy and Matplotlib
 
 * Homework 1: Data Analysis and Jupyter Notebooks
   - Load iris data into numpy and seperate into targets and features. Plot histograms for each feature.
