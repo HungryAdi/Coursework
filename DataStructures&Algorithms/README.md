@@ -25,7 +25,7 @@
     - Set: Implement with a trailer linked list that contains a trailer node that points to the back of the list. Track the size of the list with a variable so traversal is not required.
     
  * Program 3: Implement Priority Queue and Map (and Iterators) with Binary Trees
- 		 - Priority Queue: Implement by storing values in a Max Heap, which makes enqueue and dequeue values take O(Log N) time. Supply the queue with a "greater than" function to determine the priority of an object relative to another.
+    - Priority Queue: Implement by storing values in a Max Heap, which makes enqueue and dequeue values take O(Log N) time. Supply the queue with a "greater than" function to determine the priority of an object relative to another.
     - Map: Implement by storing values in a Binary Search Tree where only the keys are compared. Supply the Map with a "less than" function to determine whether a pair containing key and value should be stored in the left or right subtree.
     
  *  Program 4: Implement Maps and Sets (and Iterators) with Hash Tables
