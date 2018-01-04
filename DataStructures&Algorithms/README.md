@@ -20,9 +20,18 @@
     - Word Generator: Given a word order statistic and a file containing text, store the corpus of words in a Map. Prompt the user to enter the number of random words to generate, and randomly generate words from the corpus.
   
   * Program 2: Implement Queue, Priority Queue and Set (and Iterators) with Linked Lists
-  	- Queue: Implement with a linear linked list and two instance variables that refer to the front and back of the list. Track the size of the list with a variable so traversal is not required.
-   - Priority Queue: Supply the queue with a "greater than" function to determine the priority of an object relative to another and a header node that points to the front of the list. Track the size of the list with a variable so traversal is not required.
- 		- Set: Implement with a trailer linked list that contains a trailer node that points to the back of the list. Track the size of the list with a variable so traversal is not required.
+  	 - Queue: Implement with a linear linked list and two instance variables that refer to the front and back of the list. Track the size of the list with a variable so traversal is not required.
+    - Priority Queue: Supply the queue with a "greater than" function to determine the priority of an object relative to another and a header node that points to the front of the list. Track the size of the list with a variable so traversal is not required.
+ 		 - Set: Implement with a trailer linked list that contains a trailer node that points to the back of the list. Track the size of the list with a variable so traversal is not required.
     
  * Program 3: Implement Priority Queue and Map (and Iterators) with Binary Trees
- 		-
+ 		 - Priority Queue: Implement by storing values in a Max Heap, which makes enqueue and dequeue values take O(Log N) time. Supply the queue with a "greater than" function to determine the priority of an object relative to another.
+    - Map: Implement by storing values in a Binary Search Tree where only the keys are compared. Supply the Map with a "less than" function to determine whether a pair containing key and value should be stored in the left or right subtree.
+    
+ *  Program 4: Implement Maps and Sets (and Iterators) with Hash Tables
+    - Map: Implement using open addressing (by linear probing) and processing parallel arrays. The first array stores key value pairs while the second contains the status of each index: empty, occupied, was occupied. Supply the map with a hashing function that hashes only the key of the pair.
+    - Set: Implement similarly to a Map but "values" in a Set are just values rather than key/values pairs.
+    
+ * Program 5: Implement Graphs with Maps and Sets and apply to Djikstra's Algorithm
+    - Graph: Implement the Graph using a HashMap and HashSet (see Program 4). Each Graph is represented with twp Maps that can store Sets useful to the Djikstra's algorithm problem. One Map uses nodes as keys while the other uses edges as keys.
+    - Djikstra's Shortest Path Algorithm: Reads a graph representing flight costs (edges) between cities (nodes). Given a start node from the user, a map is computed to give the minimum costs to all the reachable nodes from the start node. Given a stop node from the user, compute the minimum cost to reach that end node and display the nodes along the path from start->node.
