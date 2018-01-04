@@ -1,7 +1,7 @@
 ## [Data Structures and Algorithms](https://github.com/HungryAdi/Coursework/tree/master/DataStructures%26Algorithms)
 ### All programs written in C++
   * Quiz 1: Linked List Remove Pairs
-   - Iterative and Recursive Functions that take a linked list as a parameter. The functions remove any duplicate pairs of values contained in the list while maintaining the order of the remaining elements.
+    - Iterative and Recursive Functions that take a linked list as a parameter. The functions remove any duplicate pairs of values contained in the list while maintaining the order of the remaining elements.
   
   * Quiz 6: Sorting Methods
    - Selection Sort: O(n^2) sorting algorithm written to sort the values of a linked list by changing node values rather than the order of nodes.
