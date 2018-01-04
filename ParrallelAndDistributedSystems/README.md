@@ -1,4 +1,4 @@
-## Parallel and Distributed Systems
+## [Parallel and Distributed Systems](https://github.com/HungryAdi/Coursework/tree/master/ParrallelAndDistributedSystems)
 Program written in C and uses MPI (Message Passing Interface) to distribute work across multiple computers.
 
 * Dining Philosopher's Problem
