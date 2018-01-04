@@ -29,3 +29,43 @@ All programs written in Java
   - Generate large amounts of data specified by a grammar specified by objects stored in memory.
   - JUnit to test the generation of a Grammar, creation of a Mock Random series of numbers (pseudorandom), and then generation of random sentences described by grammar rules.
   
+### Racket
+Functions written in Racket to explore functional programming and recursion
+
+* Fourth Element
+  - Receives a list of numbers and returns the 4th element in the list, or an empty list if 4 or more elements are not present.
+  
+* Nth Element
+  - Similar to Fourth Element but function returns the specified nth element of a list..
+  
+* List Length
+  - Takes a list and returns the number of elements in the list
+  
+* Count Matches
+  - Takes a list and symbol S and returns the number of occurrences of S in the list.
+  
+* My Append
+  - Concatenates two lists, maintaining the order of elements in each list.
+  
+* Is Increasing?
+  - Returns "True" if elements in a list are increasing in value and "False" if not.
+  
+* Remove Duplicates
+  - Takes a list and returns a new list with all duplicate values in the input list removed.
+  
+* Calculate Running Sums
+  - Takes a list and returns a new list where the nth element in the output list is the sum of the first n elements in the input list.
+  
+* Recursive Sums
+  - Takes a list of numbers (and/or sublists of numbers) and returns the sum of all atoms in the list.
+  
+* Filter Items
+  - Takes a function F (returns a boolean) and list L as input and returns a list where all elements are elements in L that returned "True" when passed to function F.
+  
+* Bonus Queue
+  - Implement a Queue as a list in Racket with constructor, and enqueue/dequeue operations
+  - Improve performance by using two lists, one of the first i elements starting at the front and moving forward, and one of the last j elements starting with the back of the queue and moving backward.
+  - Reduces the need for list traversal which is expensive in a functional language.
+  
+* Find Max
+  - Takes the list and returns the maximum value.
