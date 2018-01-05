@@ -38,7 +38,7 @@
 * WebGL lighting simulator using three shading methods to illuminate a 3D object.
   
 ## [Computer Graphics](https://github.com/HungryAdi/Coursework/tree/master/ComputerGraphics)
-## Programs written in C++   
+### Programs written in C++   
 * Implementations of a Restricted OpenGL Library (fewer functions).
 * Phong Illumination model.
 * Vertex and Fragment shader for shading and texture mapping.
