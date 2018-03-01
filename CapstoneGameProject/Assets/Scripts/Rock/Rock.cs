@@ -1,12 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rock : MonoBehaviour {
     public enum Type {
         Normal,
         Lava,
         Solid,
-        Breakable
+        Breakable,
+        King
     }
     private Collider2D col;
     private SpriteRenderer sr;
@@ -33,6 +35,7 @@ public class Rock : MonoBehaviour {
                     sr.color = Color.white;
                     sr.sprite = breakableSprites[r];
                     sr.material = breakableRockMaterials[r];
+                    ps.Stop();
                     gameObject.layer = LayerMask.NameToLayer("Grappleable");
                     break;
                 case Type.Lava:
@@ -43,18 +46,24 @@ public class Rock : MonoBehaviour {
                     break;
                 case Type.Normal:
                     sr.color = Color.white;
-                    
+                    ps.Stop();
                     sr.sprite = rockSprites[r];
                     sr.material = rockMaterials[r];
                     gameObject.layer = LayerMask.NameToLayer("Grappleable");
                     break;
                 case Type.Solid:
                     sr.color = Color.grey;
+                    ps.Stop();
                     sr.sprite = rockSprites[0]; // always circular rock for end game screen
                     sr.material = rockMaterials[0];
                     gameObject.layer = LayerMask.NameToLayer("Grappleable");
                     transform.localScale = Vector3.one;
                     IgnoreCollisions(false);
+                    break;
+                case Type.King:
+                    sr.color = Color.yellow;
+                    sr.sprite = rockSprites[0];
+                    sr.material = rockMaterials[0];
                     break;
                 default:
                     break;
@@ -74,10 +83,12 @@ public class Rock : MonoBehaviour {
                 OnPool();
             }
         }
-        if (Game.GetScreenState(gameObject) == Game.ScreenState.OnScreen) {
-            gameObject.layer = type == Type.Lava ? LayerMask.NameToLayer("Lava") : LayerMask.NameToLayer("Grappleable");
-        } else {
-            gameObject.layer = LayerMask.NameToLayer("Offscreen");
+        if(SceneManager.GetSceneByName("Main") == SceneManager.GetActiveScene()) {
+            if (Game.GetScreenState(gameObject) == Game.ScreenState.OnScreen) {
+                gameObject.layer = type == Type.Lava ? LayerMask.NameToLayer("Lava") : LayerMask.NameToLayer("Grappleable");
+            } else {
+                gameObject.layer = LayerMask.NameToLayer("Offscreen");
+            }
         }
     }
 
@@ -97,8 +108,9 @@ public class Rock : MonoBehaviour {
                 }
             }
         }
-
-        RockSpawner.instance.ReturnRock(gameObject);
+        if (RockSpawner.instance && gameObject) {
+            RockSpawner.instance.ReturnRock(gameObject);
+        }
     }
     public void OnPool() {
         GameObject particles = Instantiate(poolParticles, transform.position, Quaternion.identity);

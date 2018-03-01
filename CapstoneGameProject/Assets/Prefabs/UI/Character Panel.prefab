@@ -822,6 +822,7 @@ MonoBehaviour:
   m_PreferredHeight: 20
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114643794881045114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -863,7 +864,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_MethodName: ToggleSettings
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1090,25 +1091,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charJoin: {fileID: 0}
   joinText: {fileID: 1314524132619400}
-  settingsPanel: {fileID: 0}
-  childSelectableObjects: []
-  panelJoinedObjects:
-  - {fileID: 1760661658966422}
-  - {fileID: 1688475217250354}
-  - {fileID: 1587029943375014}
-  - {fileID: 1089044193061596}
+  childSelectableObjects:
+  - {fileID: 114835141082658826}
+  - {fileID: 114280173348140280}
+  - {fileID: 114555573995903108}
+  - {fileID: 114643794881045114}
   AIPanel: {fileID: 0}
   instructions: {fileID: 1649344926864396}
   readyLeave: {fileID: 1463352999026636}
-  rockPrefab: {fileID: 1303127070508730, guid: d79778876d10ae046a7880fb8d9590dc, type: 2}
   playerNameImage: {fileID: 114697844727195238}
-  playerNum: 1
+  rockPrefab: {fileID: 1303127070508730, guid: d79778876d10ae046a7880fb8d9590dc, type: 2}
+  player: {fileID: 0}
+  settingsPanel: {fileID: 0}
   settingsPanelObjects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  player: {fileID: 0}
-  SetReady: 0
+  playerNum: 1
 --- !u!114 &114958248490423150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1280,8 +1279,8 @@ RectTransform:
   m_Children:
   - {fileID: 224686222053097916}
   - {fileID: 224965266038103618}
-  - {fileID: 224565090692610012}
   - {fileID: 224536931028213742}
+  - {fileID: 224565090692610012}
   - {fileID: 224933115528470742}
   - {fileID: 224230426477346466}
   - {fileID: 224988749042293508}
@@ -1415,7 +1414,7 @@ RectTransform:
   m_Children:
   - {fileID: 224527896655271488}
   m_Father: {fileID: 224089945870640588}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.25}
   m_AnchorMax: {x: 0.8, y: 0.35}
@@ -1456,7 +1455,7 @@ RectTransform:
   m_Children:
   - {fileID: 224086923373950952}
   m_Father: {fileID: 224089945870640588}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.1}
   m_AnchorMax: {x: 0.8, y: 0.2}

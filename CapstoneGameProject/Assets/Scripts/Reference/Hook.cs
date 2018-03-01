@@ -21,18 +21,20 @@ public class Hook : MonoBehaviour {
 	private AudioClip hitSound;
     private PlayerMovement pm;
     private GameObject rockHit;
-    private AimGrapple aimGrapple;
+    private Aim aimGrapple;
+
     void Start() {
         lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
         pm = GetComponent<PlayerMovement>();
 		source = GetComponent<AudioSource>();
-        aimGrapple = GetComponentInChildren<AimGrapple>();
-		shootSound = Resources.Load<AudioClip>("Audio/SFX/shoot");
+        aimGrapple = transform.Find("Aim").GetComponent<Aim>();
+        shootSound = Resources.Load<AudioClip>("Audio/SFX/shoot");
 		hitSound = Resources.Load<AudioClip>("Audio/SFX/RockHit1");
     }
+
     void Update() {
-        // left click to fire grappling hook
+        // left click to fire Grappling hook
         if (GameInput.Shoot.WasPressed() && !hook) {
             lineRenderer.enabled = true;
             destination = aimGrapple.GetAimDirection() * GrappleLength;

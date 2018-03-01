@@ -736,24 +736,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charJoin: {fileID: 0}
   joinText: {fileID: 1430209175327442}
-  settingsPanel: {fileID: 0}
-  childSelectableObjects: []
-  panelJoinedObjects:
-  - {fileID: 1817067194678142}
-  - {fileID: 1089771005209478}
-  - {fileID: 1322864932841132}
+  childSelectableObjects:
+  - {fileID: 114311240344660806}
+  - {fileID: 114290788832153998}
+  - {fileID: 114190498957787416}
   AIPanel: {fileID: 0}
   instructions: {fileID: 1086970144405958}
   readyLeave: {fileID: 1328650551332740}
-  rockPrefab: {fileID: 1303127070508730, guid: d79778876d10ae046a7880fb8d9590dc, type: 2}
   playerNameImage: {fileID: 114694237028745768}
-  playerNum: 2
+  rockPrefab: {fileID: 1303127070508730, guid: d79778876d10ae046a7880fb8d9590dc, type: 2}
+  player: {fileID: 0}
+  settingsPanel: {fileID: 0}
   settingsPanelObjects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  player: {fileID: 0}
-  SetReady: 0
+  playerNum: 2
 --- !u!114 &114694237028745768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -907,6 +905,7 @@ MonoBehaviour:
   m_PreferredHeight: 20
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114898818782562522
 MonoBehaviour:
   m_ObjectHideFlags: 1

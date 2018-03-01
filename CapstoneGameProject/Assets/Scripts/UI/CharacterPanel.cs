@@ -5,34 +5,42 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CharacterPanel : MonoBehaviour, System.IComparable {
+    //UI Objects
     public CharacterJoinController charJoin;
     public GameObject joinText;
-    public GameObject settingsPanel;
     public MySelectable[] childSelectableObjects;
-    public GameObject[] panelJoinedObjects;
     public GameObject AIPanel;
     public GameObject instructions;
     public GameObject readyLeave;
-    public GameObject rockPrefab;
     public Image playerNameImage;
-    public int playerNum;
+    public GameObject rockPrefab;
+
+    //Activate/Deactivate Objects
+    public GameObject player; //Jeffrey
+    private GameObject rock;  //Jeffrey
+
+
+    //Settings Panel Objects
+    public GameObject settingsPanel;
     public GameObject[] settingsPanelObjects;
+    private bool settingsActive = false;
+
+    //Vars
+    public int playerNum;
     private string readyText = "Ready!";
+    private bool colorChanged;
+    private bool joinedLastFrame; //Jeffrey
+
+    //Selected Information
     private MySelectable selected;
     private int selectedNum;
-    private bool settingsActive = false;
-    private bool colorChanged;
-    public GameObject player;
-    private GameObject rock;
     private Color currentColor;
-    public bool SetReady = false;
-    private bool joinedLastFrame;
+
     // Use this for initialization
     void Start() {
         colorChanged = false;
-        childSelectableObjects = GetComponentsInChildren<MySelectable>();
         playerNameImage.sprite = Resources.Load<Sprite>("LobbyUI/Player-" + playerNum);
-        PlayerPrefs.SetInt("IsAI" + playerNum, 0);
+        charJoin.SetAIPlayerPref(playerNum, 0);
         if (childSelectableObjects.Length > 0)
             ChangeSelectedChild(0);
         if (playerNum == 1) {
@@ -46,19 +54,18 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
         }
     }
 
-    void OnEnable() {
-        if (childSelectableObjects.Length > 0)
-            ChangeSelectedChild(0);
-    }
+    //To make sure that something is selected when the object is enabled
+    //void OnEnable() {
+    //    if (childSelectableObjects.Length > 0)
+    //        ChangeSelectedChild(0);
+    //}
 
     // Update is called once per frame
     void Update() {
-        if (SetReady) {
-            charJoin.SetReadyPlayer(playerNum);
-            SetReady = false;
-        }
+        //Controller Player Movement
         Vector2 v = new Vector2(GameInput.Horizontal.GetRawDelayed(playerNum), GameInput.Vertical.GetRawDelayed(playerNum));
-        if (!joinText.activeSelf && !charJoin.HasJoined(playerNum)) {
+        if (!charJoin.HasJoined(playerNum)) //player has joined CHECK
+        {
             if (v.y != 0 || v.x != 0) {
                 if (v.y != 0) {
                     ChangeSelectedChild(selectedNum - (v.y > 0 ? 1 : -1));
@@ -70,15 +77,13 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
             }
         }
 
+        //Controller and Keyboard Player Button Presses
         if ((GameInput.Submit.WasPressed(playerNum) || Input.GetKeyDown(GetKeyCode(playerNum, false, true)))) {
-            if (!charJoin.IsActive(playerNum) || (playerNum != 1 && (PlayerPrefs.GetInt("IsAI" + playerNum, 0) == 0 ? false : true)))//Player is not active
-            {
-                Debug.Log(charJoin.IsActive(playerNum));
+            if (!charJoin.IsActive(playerNum) || (playerNum != 1 && (charJoin.GetAIPlayerPref(playerNum,0) ? false : true)))//Player is not active
                 TogglePanel(true, false);
-            } else {
-                if (selected && selected.enabled) {
+            else {
+                if (selected && selected.enabled)//Player active and selected active
                     selected.OnPress();
-                }
                 if (charJoin.HasJoined(playerNum) && joinedLastFrame) {
                     playerNameImage.sprite = Resources.Load<Sprite>("LobbyUI/Ready_Exclamation");
                     charJoin.SetReadyPlayer(playerNum);
@@ -89,16 +94,14 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
 
         if (Input.GetKeyDown(GetKeyCode(playerNum, true, true))) {
             if (joinText.activeSelf)//Player is not active
-            {
                 ToggleAIPanel(true);
-            }
         }
-        if (GameInput.Cancel.WasPressed(playerNum) || Input.GetKey(GetKeyCode(playerNum, false, false))) {
-            if (charJoin.HasJoined(playerNum)) {
+        if (GameInput.Cancel.WasPressed(playerNum) || Input.GetKey(GetKeyCode(playerNum, false, false))) //Back Button Pressed
+        {
+            if (charJoin.HasJoined(playerNum)) //Set Ready to False
                 ToggleReady(false);
-            } else {
-                charJoin.CharExit(playerNum);
-            }
+            else
+                charJoin.CharExit(playerNum); //Set Active to False
         }
 
     }
@@ -109,6 +112,13 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
         }
     }
 
+    public void ToggleRock(bool activate) {
+        if (rock) {
+            rock.SetActive(activate);
+        }
+    }
+
+    //Jeffrey
     private void InitColor(bool activate) {
         if (!colorChanged && activate) {
             colorChanged = true;
@@ -120,29 +130,55 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
     }
 
     public void TogglePanel(bool activate, bool settings) {
+        //int totAI = charJoin.ResetAI();
         if (activate) {
-            player = PlayerSpawner.instance.SpawnPlayer(panelJoinedObjects[0].transform.position, playerNum - 1);
+            charJoin.SetAIPlayerPref(playerNum, 0);
+            player = PlayerSpawner.instance.SpawnPlayer(childSelectableObjects[0].transform.position, playerNum);
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             player.GetComponent<PlayerInfo>().ToggleAim(!activate);
+            if (playerNum > 1 && AIPanel.activeSelf)
+            {
+                ToggleAIPanel(false);
+                charJoin.ChangeAINumber(1, playerNum + 1);
+                int tot = Utilities.CountTotalAI();
+                charJoin.SetupAllAI(tot);
+            }
         } else {
             charJoin.RemovePlayer(playerNum);
             Destroy(player);
             joinText.SetActive(true);
             ToggleObjects(activate);
             playerNameImage.gameObject.SetActive(activate);
+            int tot = Utilities.CountTotalAI();
+            for(int i = 1; i < charJoin.maxPlayers; i++)
+            {
+                if (charJoin.charPanels[i].AIPanel.activeSelf)
+                {
+                    charJoin.charPanels[i].ToggleAIPanel(false);
+                    PlayerPrefs.SetInt("IsAI" + (i + 1),0);
+                }
+            }
+            for(int i = 0; i < tot; i++)
+            {
+                charJoin.ChangeAINumber(1,2);
+            }
+            charJoin.SetupAllAI(tot);
             return;
         }
+
         InitColor(activate);
-        charJoin.SetUnjoinedPlayer(playerNum);
+        charJoin.SetUnjoinedPlayer(playerNum); //Not sure about this part needing to be here
         ToggleObjects(activate);
         playerNameImage.gameObject.SetActive(activate);
         joinText.SetActive(!activate);
-        if (AIPanel)
-            AIPanel.SetActive(false);
+
+
         childSelectableObjects = GetComponentsInChildren<MySelectable>();
         playerNameImage.sprite = Resources.Load<Sprite>("LobbyUI/Player-" + playerNum);
-        if (childSelectableObjects.Length > 0)
+        if (childSelectableObjects.Length > 0) //Select Child
             ChangeSelectedChild(0);
+
+        //charJoin.SetupAllAI(totAI);
     }
 
     public void ToggleAIPanel(bool activate) {
@@ -153,6 +189,8 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
         }
         if (activate) {
             charJoin.SetReadyPlayer(playerNum);
+            //Debug.Log("Called");
+            charJoin.SetAIPlayer(playerNum);
         } else {
             charJoin.RemovePlayer(playerNum);
         }
@@ -161,7 +199,8 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
 
     }
 
-    private KeyCode GetKeyCode(int num, bool ai, bool activate) {
+    private KeyCode GetKeyCode(int num, bool ai, bool activate) //Jeffrey
+    {
         if (activate) {
             switch (num) {
                 case 1:
@@ -198,10 +237,10 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
             pos = 0;
         else if (pos < 0)
             pos = len - 1;
-
         ChangeSelectedObject(pos);
     }
 
+    //For Character Portrait Color Change
     public void ChangeSelectedColor(int change) {
         if (CharacterJoinController.uniqueLoop != null) {
             if (change == 1) {
@@ -222,29 +261,27 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
         }
     }
 
-
-
-
+    //Not sure if this is neccessary
     public void ChangeSelectedColorArrows(int changeInPos) {
         ChangeSelectedColor(changeInPos);
     }
 
     public void ToggleReady(bool join) {
-        //Debug.Log("ToggleReady");
-        if (instructions) {
+        if (instructions)
             instructions.SetActive(join);
-        }
-        GameObject readyButton = panelJoinedObjects[1];
+        GameObject readyButton = childSelectableObjects[1].gameObject;
         if (!charJoin)
             charJoin = GameObject.FindGameObjectWithTag("CombinedPlayerController").GetComponent<CharacterJoinController>();
-        if (join && !charJoin.HasJoined(playerNum)) {
+        if (join && !charJoin.HasJoined(playerNum)) //Joined and not joined(in charJoin dictionary)
+        {
             charJoin.SetJoinedPlayer(playerNum);
-            ToggleObjects(!join);
+            ToggleObjects(!join); //Deactivate old UI Objects or Activate when UnReady
             playerNameImage.gameObject.SetActive(join);
             player.GetComponent<PlayerInfo>().ToggleFreezeMovement(!join);
             player.GetComponent<PlayerInfo>().ToggleAim(join);
-            if (!rock) {
-                rock = Instantiate(rockPrefab, panelJoinedObjects[0].transform.position, Quaternion.identity);
+            if (!rock) //Jeffrey
+            {
+                rock = Instantiate(rockPrefab, childSelectableObjects[0].transform.position, Quaternion.identity);
                 rock.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 rock.name = "Rock " + playerNum;
             } else {
@@ -252,11 +289,12 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
             }
             instructions.SetActive(join);
             readyLeave.SetActive(join);
-        } else if (!join && charJoin.HasJoined(playerNum)) {
+        } else if (!join && charJoin.HasJoined(playerNum)) //Not Joined and Joined(in charJoin dictionary)
+        {
             charJoin.SetUnjoinedPlayer(playerNum);
             playerNameImage.sprite = Resources.Load<Sprite>("LobbyUI/Player-" + playerNum);
             ToggleObjects(!join);
-            player.transform.position = panelJoinedObjects[0].transform.position;
+            player.transform.position = childSelectableObjects[0].transform.position;
             player.GetComponent<PlayerInfo>().ToggleFreezeMovement(!join);
             player.GetComponent<PlayerInfo>().ToggleAim(join);
             player.GetComponent<Blob>().Restart();
@@ -264,9 +302,7 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
             instructions.SetActive(join);
             readyLeave.SetActive(join);
         }
-
-        PlayerPrefs.SetInt("IsAI" + playerNum, 0);
-
+        charJoin.SetAIPlayerPref(playerNum, 0);       //Reset PlayerPrefsAI to 0
     }
 
     private void ChangeSelectedObject(int pos) {
@@ -282,8 +318,8 @@ public class CharacterPanel : MonoBehaviour, System.IComparable {
     }
 
     private void ToggleObjects(bool activate) {
-        foreach (GameObject g in panelJoinedObjects) {
-            g.SetActive(activate);
+        foreach (MySelectable g in childSelectableObjects) {
+            g.gameObject.SetActive(activate);
         }
     }
 

@@ -14,12 +14,14 @@ public class RockSpawner : MonoBehaviour {
     public bool considerPlayerPosition; // whether or not to spawn based on where the players currently are
     public static RockSpawner instance; //singleton
     public float spawnFrequency; // how often a rock spawns
+    public float kingSpawnFrequency; // how often a rock spawns in King of the Hill mode
     public float spawnDecrease; // how much spawnFrequency decreases each time a rock spawns
     public float minScale; // min value for the scale of the rock
     public float maxScale; // max value for the scale of the rock
     public int maxRockCount; // max number of rocks in the pool
     public float lavaLaunchVelMin; // how fast the lava rocks shoot up when they spawn
     public float lavaLaunchVelMax;
+    public float kingRockSize; // how big the king rock is
     public float minGravScale; // min value for the gravity scale of the rock
     public float maxGravScale; // max value for the gravite scale of the rock
     public float warningDuration; // how long the warning appears before the lava rock spawns
@@ -27,6 +29,8 @@ public class RockSpawner : MonoBehaviour {
     private Stack<GameObject> pool; // data structure used to store the rocks, only creates maxRockCount rocks and pools them so that they don't have to be reinstantiated
     private int numActiveRocks; // how many rocks are currently active (not pooled)
     private float binWidth;
+    public static float lowestSpawn;
+    public static float highestSpawn;
     // Use this for initialization
     void Start() {
         //initialize variables
@@ -36,6 +40,8 @@ public class RockSpawner : MonoBehaviour {
         pool = new Stack<GameObject>();
         numBins = binWeights.Length;
         binWidth = 1.0f / numBins;
+        lowestSpawn = -12.5f;
+        highestSpawn = 17.5f;
         // populate pool with new rocks
         for (int i = 0; i < maxRockCount; ++i) {
             GameObject rock = Instantiate(rockPrefab, new Vector3(-100, -100, 0), Quaternion.identity); // spawn the rock initially offscreen
@@ -48,6 +54,12 @@ public class RockSpawner : MonoBehaviour {
             Vector3 end = Camera.main.ViewportToWorldPoint(new Vector3(i * binWidth, 0, 0));
             end.z = 0;
             Debug.DrawLine(start, end, Color.red, Mathf.Infinity);
+        }
+        if(PlayerPrefs.GetString("GameMode") == "King of the Hill") {
+            SpawnKingRock();
+            spawnFrequency = kingSpawnFrequency;
+            lavaRockSpawnRate = 0;
+            spawnDecrease = 0;
         }
     }
 
@@ -102,6 +114,11 @@ public class RockSpawner : MonoBehaviour {
                 rockRb.constraints = RigidbodyConstraints2D.FreezeAll;
                 rockRb.gravityScale = 0;
                 PlayerInfo pi = Game.instance.GetDeadPlayers()[count - i - 1]; // last player in the list is the winner
+
+
+                //pi.mr.enabled = true;
+                //pi.col.enabled = true;
+
                 pi.blob.Restart();
                 Vector3 spawnPosition = PlayerSpawner.instance.GetSpawnPosition(pi.PlayerNumber - 1, false);
                 spawnPosition.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f - 0.1f * i, 0)).y;
@@ -149,13 +166,16 @@ public class RockSpawner : MonoBehaviour {
                 }
                 if (rock.type != Rock.Type.Lava) {
                     // move the spawn up offscreen
+                    spawnPosition.y = highestSpawn;
                     spawnPosition.y += rockGO.GetComponent<Collider2D>().bounds.size.y;
 
                 } else {
-                    spawnPosition.y *= -1; // move to bottom of the screen if lava rock
+                    rockGO.name = "Lava Rock";
+                    spawnPosition.y = lowestSpawn; // move to bottom of the screen if lava rock
 
                 }
                 spawnPosition.z = 0;
+                rockRb.bodyType = RigidbodyType2D.Dynamic;
                 rockGO.transform.position = spawnPosition;
                 rockRb.gravityScale = Random.Range(minGravScale, maxGravScale);
                 float randomScale = Random.Range(minScale, maxScale);
@@ -166,10 +186,47 @@ public class RockSpawner : MonoBehaviour {
             }
         }
     }
+
+    // spawns a rock somewhere at the top of the screen
+    private void SpawnKingRock() {
+        if (numActiveRocks < maxRockCount) {
+            GameObject rockGO = GetRock();
+            if (rockGO) {
+                rockGO.name = "King Rock";
+                rockGO.SetActive(true);
+                Rock rock = rockGO.GetComponent<Rock>();
+                Rigidbody2D rockRb = rockGO.GetComponent<Rigidbody2D>();
+                rock.type = Rock.Type.King;
+                rock.InitType();
+                Vector3 spawnPosition = new Vector3(0, 2, 0);
+                rockGO.transform.position = spawnPosition;
+                rockRb.bodyType = RigidbodyType2D.Static;
+                float randomScale = Random.Range(minScale, maxScale);
+                rockGO.transform.localScale = Vector3.one * kingRockSize;
+                if (rock.type == Rock.Type.Lava) {
+                    StartCoroutine(LavaSpawn(spawnPosition, rockRb));
+                }
+            }
+        }
+    }
     // coroutine for lava rock and its warning
     IEnumerator LavaSpawn(Vector3 spawnPosition, Rigidbody2D rockRb) {
         GameObject warning = Instantiate(lavaSpawnWarning, spawnPosition, Quaternion.identity);
-        Vector3 randomVel = new Vector3(0, Random.Range(lavaLaunchVelMin, lavaLaunchVelMax));
+        WarningAnim warningAnim = warning.GetComponent<WarningAnim>();
+        int level = Random.Range(0, 3);
+        warningAnim.level = level;
+        Vector3 randomVel = Vector3.zero;
+        switch (level) {
+            case 0:
+                randomVel = new Vector3(0, lavaLaunchVelMin);
+                break;
+            case 1:
+                randomVel = new Vector3(0, (lavaLaunchVelMin + lavaLaunchVelMax) / 2);
+                break;
+            case 2:
+                randomVel = new Vector3(0, lavaLaunchVelMax);
+                break;
+        }
         warning.GetComponent<Rigidbody2D>().velocity = randomVel;
         Destroy(warning, warningDuration); // spawn the warning for warningDuration seconds
         float gravScale = rockRb.gravityScale;

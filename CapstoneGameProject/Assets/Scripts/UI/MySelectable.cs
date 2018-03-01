@@ -61,7 +61,7 @@ public class MySelectable : Selectable {
 
     public void ChangeNumAIs(int change)
     {
-        CharacterJoinController.instance.ChangeAINumber(change);
+        CharacterJoinController.instance.ChangeAINumber(change,1);
         Image i = transform.GetChild(0).GetComponent<Image>();
         i.sprite = Resources.Load<Sprite>("LobbyUI/" + Utilities.CountTotalAI());
     }

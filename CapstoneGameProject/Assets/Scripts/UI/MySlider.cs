@@ -16,12 +16,13 @@ public class MySlider : MySelectable {
 
     protected override void Start() {
         hMovement = true;
-        ChangeSliderValue(0);
+        //ChangeSliderValue(value);
         //SetCircleSlider(Mathf.RoundToInt(value));
     }
 
     public override void ToggleSelection() {
-        base.ToggleSelection();
+        //base.ToggleSelection();
+        selected = !selected;
         circleSlider.GetComponent<RectTransform>().localScale = selected ? new Vector3(1.25f, 1.25f, 1f) : Vector3.one;
     }
 
@@ -45,6 +46,7 @@ public class MySlider : MySelectable {
         RectTransform rt = GetComponent<RectTransform>();
         float width = rt.rect.width;
         float pos = width * percent * 0.95f;
+        Debug.Log(pos);
         circleSlider.anchoredPosition = new Vector2(rt.anchoredPosition.x + pos, circleSlider.anchoredPosition.y);
     }
 

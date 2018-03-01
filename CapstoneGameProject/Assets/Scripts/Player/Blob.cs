@@ -92,6 +92,7 @@ public class Blob : MonoBehaviour {
         if (pi) {
             playerNumber = pi.PlayerNumber;
         }
+
         gameObject.layer = LayerMask.NameToLayer("Player " + playerNumber);
         for (int i = 0; i < referencePointsCount; i++) {
             referencePoints[i] = new GameObject("Collider " + (i + 1));

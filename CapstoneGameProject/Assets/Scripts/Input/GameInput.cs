@@ -37,7 +37,7 @@ public class GameInput : MonoBehaviour {
         StartButton = XGameButton.Start;
         Swipe = XGameButton.RightBumper;
 
-        axisButtons = new GameButton[] { Shoot, UseWeapon, Submit, Cancel, StartButton };
+        axisButtons = new GameButton[] { Shoot, UseWeapon, Submit, Cancel, StartButton, Swipe };
 
         Horizontal = XGameAxis.LeftStickHorizonal;
         Vertical = XGameAxis.LeftStickVertical;

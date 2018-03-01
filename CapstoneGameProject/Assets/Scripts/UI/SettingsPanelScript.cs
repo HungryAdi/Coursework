@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//CharacterSelectScene SettingsPanel
 public class SettingsPanelScript : MonoBehaviour {
 
     public static SettingsPanelScript instance;
+    [HideInInspector]
     public MySelectable[] childSelectableObjects;
     public Image AIText;
     public Image playerNameImage;
     public MySelectable selected;
+    public GameObject RegularSettingsObjects;
+    public GameObject AdvancedsettingsObjects;
     private int selectedNum = 0;
+    private bool advancedSettingsActive = false;
 
     void Start()
     {
         instance = this;
-        childSelectableObjects = GetComponentsInChildren<MySelectable>();
-        ChangeSelectedChild(0);
         playerNameImage.sprite = Resources.Load<Sprite>("LobbyUI/Player-" + CharacterJoinController.instance.currentSettingsPlayerNum);
+    }
 
-
+    private void LateUpdate()
+    {
+        if(childSelectableObjects.Length == 0)
+        {
+            ChangeSelectedChild(0);
+        }
     }
 
     void Update()
@@ -36,11 +45,6 @@ public class SettingsPanelScript : MonoBehaviour {
             if (v.x != 0)
             {
                 selected.OnMoveTrigger(v.x);
-                //if (selected == panelJoinedObjects[0] && !settingsActive) {
-                //    ChangeSelectedColor((v.x > 0 ? 1 : -1));
-                //} else if (settingsPanel && selected == settingsPanelObjects[0]) {
-                //    ChangeSelectedLives(v.x > 0 ? 1 : -1);
-                //}
             }
         }
 
@@ -52,6 +56,8 @@ public class SettingsPanelScript : MonoBehaviour {
 
     public void ChangeSelectedChild(int pos)
     {
+        if(childSelectableObjects.Length == 0)
+            childSelectableObjects = GetComponentsInChildren<MySelectable>();
         int len = childSelectableObjects.Length;
         if (pos >= len)
             pos = 0;
@@ -67,7 +73,6 @@ public class SettingsPanelScript : MonoBehaviour {
         {
             selected.OnMoveAway();
         }
-
         selected = childSelectableObjects[pos];
         selectedNum = pos;
 
@@ -83,8 +88,17 @@ public class SettingsPanelScript : MonoBehaviour {
     {
         PlayerPrefs.SetInt("InfiniteLives", PlayerPrefs.GetInt("InfiniteLives", 0) == 0 ? 1 : 0);
         check.SetActive(PlayerPrefs.GetInt("InfiniteLives", 0) == 0 ? false : true);
-        childSelectableObjects = GetComponentsInChildren<MySelectable>();
+        //childSelectableObjects = GetComponentsInChildren<MySelectable>();
 
+    }
+
+    public void ToggleAdvancedSettings()
+    {
+        RegularSettingsObjects.SetActive(advancedSettingsActive);
+        AdvancedsettingsObjects.SetActive(!advancedSettingsActive);
+        advancedSettingsActive = !advancedSettingsActive;
+        childSelectableObjects = GetComponentsInChildren<MySelectable>();
+        ChangeSelectedChild(0);
     }
 
 

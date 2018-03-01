@@ -54,8 +54,8 @@ MonoBehaviour:
   mode: 1
   render: 0
   resetOnExpiration: 0
-  duration: 10
+  duration: -1
   font: {fileID: 12800000, guid: 60ac1ac8f77fed4478295794725a613f, type: 3}
-  fontSize: 50
-  minAnchor: {x: 0, y: 0.8}
+  fontSize: 30
+  minAnchor: {x: 0, y: 0.7}
   maxAnchor: {x: 1, y: 1}

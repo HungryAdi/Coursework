@@ -28,8 +28,6 @@ public class EventSystemFirstSelectedSetup : MonoBehaviour {
         //ChangeToNewSelected();
         if (SceneManager.GetActiveScene().name == "TitleScene") {
             ChangeSelectedChild(0, Navigator.instance.titleScreenMenu);
-        } else if (SceneManager.GetActiveScene().name == "Main") {
-            ChangeSelectedChild(0, Navigator.instance.inGameMenu);
         }
     }
 
@@ -103,12 +101,16 @@ public class EventSystemFirstSelectedSetup : MonoBehaviour {
     public void ChangeSelectedChild(int pos, GameObject go) {
         if (go) {
             selectableObjects = go.GetComponentsInChildren<MySelectable>();
-            int len = selectableObjects.Length;
-            if (pos >= len)
-                pos = 0;
-            else if (pos < 0)
-                pos = len - 1;
-            ChangeSelectedObject(pos);
+            if (selectableObjects.Length > 0)
+            {
+                int len = selectableObjects.Length;
+                if (pos >= len)
+                    pos = 0;
+                else if (pos < 0)
+                    pos = len - 1;
+                ChangeSelectedObject(pos);
+            }
+
         }
     }
 

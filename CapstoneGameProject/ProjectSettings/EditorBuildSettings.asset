@@ -12,5 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/In-Game/Main.unity
     guid: 1211db232a7c7644d9990680899d7323
   - enabled: 1
+    path: Assets/Scenes/In-Game/GameModeScene.unity
+    guid: cc98a512ae3cdd445a3418aed69e8da2
+  - enabled: 1
     path: Assets/Scenes/In-Game/CharacterReadyScene.unity
     guid: f5416d62b884af54fbd96ba02b80bf24
+  - enabled: 1
+    path: Assets/Scenes/In-Game/TrainingScene.unity
+    guid: 73a24551851e05f4f810550fc7205780

@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         instance = this;
-        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main")) {
+        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("TrainingScene")) {
             SpawnStartingPlayers();
         }
 
@@ -20,14 +20,14 @@ public class PlayerSpawner : MonoBehaviour {
 
     public GameObject SpawnPlayer(Vector3 position, int i) {
         GameObject player;
-        if (PlayerPrefs.GetInt("IsAI" + (i + 1)) == 1) {
+        if (PlayerPrefs.GetInt("IsAI" + i) == 1) {
             player = Instantiate(AIPrefab, position, Quaternion.identity);
         } else {
             player = Instantiate(playerPrefab, position, Quaternion.identity);
         }
         GameObject gsGO = Instantiate(grappleShooter, position, Quaternion.identity);
         PlayerInfo pi = player.GetComponent<PlayerInfo>();
-        pi.PlayerNumber = i + 1;
+        pi.PlayerNumber = i;
         GrappleShooter gs = player.GetComponent<GrappleShooter>();
         gs.grappleGO = gsGO;
         Grapple g = gsGO.GetComponent<Grapple>();
@@ -38,7 +38,7 @@ public class PlayerSpawner : MonoBehaviour {
     public void SpawnStartingPlayers() {
         numPlayers = PlayerPrefs.GetInt("NumberOfPlayers");
         for (int i = 0; i < numPlayers; ++i) {
-            SpawnPlayer(GetSpawnPosition(i, false), i);
+            SpawnPlayer(GetSpawnPosition(i, false), (i + 1));
         }
     }
 

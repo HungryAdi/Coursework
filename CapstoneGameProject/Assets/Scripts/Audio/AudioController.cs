@@ -15,7 +15,10 @@ public class AudioController : MonoBehaviour {
     private AudioSource backgroundSource;
     private AudioSource sfxSource;
     private AudioSource ambientSource;
+	private bool titleSceneFlag; // To determine if the Title Scene is loaded from itself
     private bool childActive; // For menu toggle, is the menu active?
+    private GameObject[] playerArray; // References to all players in the game
+    private GameObject player;
 
     // Use this for initialization
     void Awake() {
@@ -24,7 +27,7 @@ public class AudioController : MonoBehaviour {
 
     void Start() {
         instance = this;
-
+		titleSceneFlag = false;
         transform.GetChild(0).gameObject.SetActive(false);
         sources = GetComponents<AudioSource>();
         // make dictionary of audio clips and their names (name is exact filename string)
@@ -45,6 +48,7 @@ public class AudioController : MonoBehaviour {
         //load all audio clips
         LoadClips();
 
+        playerArray = new GameObject[4];
     }
 
     void Update() {
@@ -107,32 +111,38 @@ public class AudioController : MonoBehaviour {
         if (!ambientSource) {
             for (int i = 0; i < sources.Length; i++) {
                 if (sources[i].outputAudioMixerGroup.name == "Ambient") {
-                    backgroundSource = sources[i];
+                    ambientSource = sources[i];
                 }
             }
         }
 
         if (scene.name == "TitleScene") {
-            AudioClip titleClip = Resources.Load<AudioClip>("Audio/BackgroundMusic/Godcano_Menu_V2");
+			if (!titleSceneFlag) {
+				AudioClip titleClip = Resources.Load<AudioClip> ("Audio/BackgroundMusic/Godcano_Menu_V2");
 
-            backgroundSource.clip = titleClip;
+				backgroundSource.clip = titleClip;
 
-
-            backgroundSource.Play();
+				backgroundSource.Play ();
+			}
+			titleSceneFlag = true;
         }
 
         if (scene.name == "Main") {
-            AudioClip clip = Resources.Load<AudioClip>("Audio/BackgroundMusic/Godcano-Theme2_Mixdown2");
+			titleSceneFlag = false;
+            AudioClip backgroundClip = Resources.Load<AudioClip>("Audio/BackgroundMusic/Godcano-Theme2_Mixdown2");
             AudioClip ambientClip = Resources.Load<AudioClip>("Audio/Ambient/LavaAmbienceLoop");
 
             if (ambientSource && ambientClip) {
                 ambientSource.clip = ambientClip;
                 ambientSource.Play();
             }
-            if (backgroundSource && clip) {
-                backgroundSource.clip = clip;
+            if (backgroundSource && backgroundClip) {
+				backgroundSource.clip = backgroundClip;
                 backgroundSource.Play();
             }
+
+            playerArray = GameObject.FindGameObjectsWithTag("Player");
+            Debug.Log(playerArray.Length);
         }
     }
 

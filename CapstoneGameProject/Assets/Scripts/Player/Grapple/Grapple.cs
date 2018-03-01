@@ -26,7 +26,7 @@ public class Grapple : MonoBehaviour {
     void Update() {
         if (!attached)
         {
-            Vector2 nudgeAim = new Vector2(GameInput.RightHorizontal.Get(grappleShooter.playerInfo.PlayerNumber), GameInput.RightVertical.Get(grappleShooter.playerInfo.PlayerNumber)).normalized;
+            Vector2 nudgeAim = new Vector2(GameInput.Horizontal.Get(grappleShooter.playerInfo.PlayerNumber), GameInput.Vertical.Get(grappleShooter.playerInfo.PlayerNumber)).normalized;
             if (nudgeAim.x != 0 || nudgeAim.y != 0)
             {
                 Vector2 velNorm = rb2d.velocity.normalized;
@@ -54,7 +54,7 @@ public class Grapple : MonoBehaviour {
         }
     }
 
-    // attaches BlobHook to the given game object (player or rock)
+    // attaches to the given game object (player or rock)
     private void AttachToObject(GameObject obj) {
         if (!fj.connectedBody) {
             if (PlayerAIScript) {
@@ -70,6 +70,10 @@ public class Grapple : MonoBehaviour {
             fj.connectedBody = objRb;
             sj.enabled = true;
             sj.connectedBody = grappleShooter.GetComponent<Rigidbody2D>();
+            Rock r = obj.GetComponent<Rock>();
+            if(r && r.type == Rock.Type.King) {
+                Game.instance.AddToKingRock(grappleShooter.playerInfo);
+            }
         }
     }
 }

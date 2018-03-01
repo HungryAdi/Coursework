@@ -63,7 +63,12 @@ public class Navigator : MonoBehaviour {
                 titleScreenMenu.SetActive(titleMenuActive);
             }
         }
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("CharacterReadyScene")) {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("TrainingScene")) {
+            for(int i = 1; i < PlayerPrefs.GetInt("NumberOfPlayers") + 1; ++i) {
+                if (GameInput.Cancel.WasPressed(i)) {
+                    LoadLevel("GameModeScene");
+                }
+            }
 
         }
     }
@@ -73,6 +78,10 @@ public class Navigator : MonoBehaviour {
         Resume();
         if (action == "Quit") {
             Application.Quit();
+            if (Application.isEditor)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         } else {
             SceneManager.LoadScene(action);
         }
@@ -85,7 +94,8 @@ public class Navigator : MonoBehaviour {
             menuActivePlayerNum = playerNum;
             if (EventSystemFirstSelectedSetup.instance) {
                 EventSystemFirstSelectedSetup.instance.SetUpInputs(playerNum);
-                EventSystemFirstSelectedSetup.instance.ChangeSelectedChild(0, inGameMenu);
+                if(EventSystemFirstSelectedSetup.selected == null)
+                    EventSystemFirstSelectedSetup.instance.ChangeSelectedChild(0, inGameMenu);
             }
         }
 
@@ -100,6 +110,7 @@ public class Navigator : MonoBehaviour {
     public void Resume() {
         if (EventSystemFirstSelectedSetup.selected) {
             EventSystemFirstSelectedSetup.selected.OnMoveAway();
+            EventSystemFirstSelectedSetup.selected = null;
         }
 
         inGameMenu.SetActive(false);
@@ -131,6 +142,9 @@ public class Navigator : MonoBehaviour {
         t.text = "Game Over";
         if (winner > 0) {
             t.text += "\n Player " + winner + " wins!";
+        }
+        if(PlayerPrefs.GetString("GameMode") == "Solo") {
+            t.text = "You lasted " + Game.instance.GetTimer().GetTimeLeft().ToString("N1") + " seconds!";
         }
 
     }
@@ -167,7 +181,7 @@ public class Navigator : MonoBehaviour {
             yield return new WaitForSeconds(Time.deltaTime);
         }
         RockSpawner.instance.SpawnEndGameRocks();
-        Game.instance.ClearHUDs();
+        Game.instance.ClearHUD();
         while (gameOverTimer < gameOverTransitionTime) {
             gameOverTimer += Time.deltaTime;
             overlayImage.color = new Color(c.r, c.b, c.g, 1f - gameOverTimer / gameOverTransitionTime);

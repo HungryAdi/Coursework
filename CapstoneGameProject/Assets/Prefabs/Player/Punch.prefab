@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298074455935224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.8278575, y: -2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,10 +77,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 2, y: 2}
     newSize: {x: 1.43, y: 1.79}
     adaptiveTilingThreshold: 0.5
@@ -88,7 +88,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.43, y: 1.79}
+  m_Size: {x: 1.43, y: 1.704587}
   m_EdgeRadius: 0
 --- !u!82 &82183211181451120
 AudioSource:
@@ -110,7 +110,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.0213528
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
   MaxPushForce: 1500
   Shot: 0
   ShotDirection: {x: 0, y: 0}
+  punchShooter: {fileID: 0}
 --- !u!114 &114912024274203528
 MonoBehaviour:
   m_ObjectHideFlags: 1

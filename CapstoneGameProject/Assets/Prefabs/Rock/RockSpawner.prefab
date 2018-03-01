@@ -65,16 +65,18 @@ MonoBehaviour:
   - 0.125
   - 0.05
   lavaRockSpawnRate: 0.05
-  breakableRockSpawnRate: 0.95
+  breakableRockSpawnRate: 0.5
   redistribute: 1
   considerPlayerPosition: 0
   spawnFrequency: 0.2
-  spawnDecrease: 0
+  kingSpawnFrequency: 0.4
+  spawnDecrease: 0.05
   minScale: 0.75
   maxScale: 1.25
   maxRockCount: 100
-  lavaLaunchVelMin: 100
-  lavaLaunchVelMax: 150
+  lavaLaunchVelMin: 75
+  lavaLaunchVelMax: 175
+  kingRockSize: 3
   minGravScale: 2
   maxGravScale: 6
   warningDuration: 3.5

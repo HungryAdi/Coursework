@@ -5,6 +5,10 @@ using UnityEngine;
 public class OffscreenArrow : MonoBehaviour {
     public PlayerInfo pi;
     private bool colorSet;
+
+    void Start() {
+        transform.parent = Camera.main.transform;
+    }
 	// Update is called once per frame
 	void Update () {
 		if(pi) {

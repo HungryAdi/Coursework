@@ -7,9 +7,9 @@ public  class Utilities : MonoBehaviour {
     public static int CountTotalAI()
     {
         int count = 0;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
-            count += PlayerPrefs.GetInt("IsAI" + i, 0);
+            count += PlayerPrefs.GetInt("IsAI" + (i + 1), 0);
         }
         //Debug.Log(count);
         return count;
