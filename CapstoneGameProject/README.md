@@ -1,7 +1,9 @@
 ## [Capstone Game Project](https://github.com/HungryAdi/Coursework/tree/master/CapstoneGameProject)
 
-![Title Screen](Media/blobcano_gameplay_784.mp4)
-### GamePlay Footage
+![Gameplay Footage](https://drive.google.com/file/d/1tcMzN_4WZH0PHwv9iWX5jG0w-wIaTd-Q/view?usp=sharing)
+
+![Title Screen](Media/TitleScreen.png)
+### Title Screen
 
 'Blobcano' is my Senior Game Project developed with a team of 6 in Unity. It is a Multiplayer Arcade game with full Xbox 360 Controller support and original art and sound assets. Over the course of two quarters (One quarter completed) my team will create a feature complete game under the guidance of mentors in the industry (Blizzard and Amazon Game Studios).
 
