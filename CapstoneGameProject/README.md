@@ -1,6 +1,6 @@
 ## [Capstone Game Project](https://github.com/HungryAdi/Coursework/tree/master/CapstoneGameProject)
 
-![Gameplay Footage](https://drive.google.com/file/d/1tcMzN_4WZH0PHwv9iWX5jG0w-wIaTd-Q/view?usp=sharing)
+[Gameplay Footage](https://drive.google.com/file/d/1tcMzN_4WZH0PHwv9iWX5jG0w-wIaTd-Q/view?usp=sharing)
 
 ![Title Screen](Media/TitleScreen.png)
 ### Title Screen
