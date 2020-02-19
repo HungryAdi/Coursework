@@ -2,10 +2,10 @@
 ### Projects and references from college classes
 ## [Machine Learning](https://github.com/HungryAdi/Coursework/tree/master/MachineLearning)
 ### Homework assignments written in Python using Numpy and MatPlotLib:
-* Introduce data analysis and Naive Bayes Classifiers
-* Linear Regression and Cross-Validation
-* Logistic Regression and Shattering
-* Clustering and Principle Compnent Analysis on humanfaces.
+* Introduce data analysis and Naive Bayes Classifiers.
+* Linear Regression and Cross-Validation.
+* Logistic Regression and Shattering.
+* Clustering and Principle Component Analysis on human faces.
    
 ## [Capstone Game Project](https://github.com/HungryAdi/Coursework/tree/master/CapstoneGameProject)
 ### Project written in C# in the Unity Game Engine
